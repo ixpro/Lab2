@@ -63,28 +63,29 @@ text-decoration: none;
 #topHeader {
 background-image: url('../images/top-back.jpg');
 }
-.selectDish #pplNbr {
+
+#pplNbr {
 width: 50px;
 text-align: center;
 }
 
-.selectDish #pplLbl {
+#sidebar #pplLbl {
 	padding-right: 15px;
 }
 
-.selectDish #sidebar #dinnerCheckList {
+#sidebar #dinnerCheckList {
 	margin-top: 20px;
 }
 
-.selectDish #sidebar {
+#sidebar {
 	margin-bottom: 20px;
 }
 
-.selectDish #sidebar h3 {
+#sidebar h3 {
 	margin-bottom: 20px;
 }
 
-.selectDish #sidebar tfoot td {
+#sidebar tfoot td {
 	text-align: right;
 }
 
@@ -101,44 +102,51 @@ text-align: center;
 }
 
 
-.selectDish #sidebar .pending {
+#sidebar .pending {
 	color: rgb(176, 20, 20);
 }
 
-.selectDish #sidebar #confirmDinnerBtn {
+#sidebar #confirmDinnerBtn {
 	width: 100%;
 }
 
-.selectDish #selectDishHeader {
+#selectView #selectViewHeader {
 background-color: rgb(255, 248, 214);
 padding-bottom: 20px;
 }
 
-.selectDish #selectDishHeader h3 {
+#selectView #selectViewHeader h3 {
 margin: 20px;
 border-bottom: 2px solid gray;
 padding-bottom: 5px;
 }
 
-.dishList li {
+#dishList li {
 width: 140px;
 float: left;
 margin: 25px 28px 0px 0px !important;
 }
 
-.dishList li a {
+#dishList li a {
 padding: 0px !important;
 }
 
-.dishList li .dishName {
+#dishList li .dishName {
 text-align: center;
 padding: 5px;
 background-color: rgb(237, 237, 237);
+height: 50px;
+overflow: hidden;
 }
 
-.dishList li .dishDesc {
+#dishList li .dishDesc {
 padding-top: 15px;
 line-height: normal;
+}
+
+#dishList li img {
+width: 140px;
+height: 140px;
 }
 
 .dishInfo .dishInfoImg {
@@ -183,7 +191,7 @@ border-left: 2px solid gray;
 }
 
 #overviewList #totalLbl {
-margin-top: 155px;
+margin-top: 175px;
 font-weight: bold;
 margin-bottom: 5px;
 margin-left: 15px;
@@ -214,11 +222,16 @@ position:relative;left:50%;float:left;margin-right:0;margin-left:0;
 position:relative;right:50%;float:left;margin:0;list-style:none
 }
 
-.dishList li a {
+#dishList li a {
 margin: 0px;
 padding: 0px;
 }
 
-.recipeList .dishImg {
+#recipeList .dishImg {
 margin-top: 20px;
+}
+
+#recipeList .dishImg {
+height: 140px;
+width: 140px;
 }

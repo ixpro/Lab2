@@ -1,189 +1,4 @@
-//DinnerModel Object constructor
-var DinnerModel = function() {
- 
-	//TODO Lab 2 implement the data structure that will hold number of guest
-	// and selected dinner options for dinner menu
-
-	this.setNumberOfGuests = function(num) {
-		//TODO Lab 2
-		// if the number of guests is less then 0, return false;
-		if(num < 0 ) return 0;
-
-		numberOfGuests = num;
-		return 1;
-	}
-
-	// should return 
-	this.getNumberOfGuests = function() {
-		//TODO Lab 2
-		return numberOfGuests;
-	}
-
-	//Returns the dishES that ARE on the menu for A selected type 
-	this.getSelectedDishes = function(type) {
-		//TODO Lab 2
-		// return $(dishes).filter(function(index,dish) {
-		// 	return dish.type == type  &&  $.inArray( dish.id, fullMenu );
-		// });	
-
-		var selectedDishesList = [];
-
-		for (var i = 0; i < fullMenu.length; i++) {
-			var dish = this.getDish(fullMenu[i]);
-			if(dish.type == type) selectedDishesList.push(dish);
-		};
-
-		return selectedDishesList;
-	}
-
-	this.getSelectedDish = function(){
-
-		var id = selectedDish;
-		return this.getDish(id);
-	}
-
-
-
-	//Returns all the dishes on the menu.
-	this.getFullMenu = function() {
-		//TODO Lab 2
-
-		// Because JavaScript treats 0 as loosely equal to false (i.e. 0 == false, but 0 !== false), 
-		// to check for the presence of value within array, 
-		// you need to check if it's not equal to (or greater than) -1.
-
-		return $(dishes).filter(function(index,dish) {
-			return  $.inArray( dish.id, fullMenu) != -1;
-		});	
-
-		// var selectedDishesList = [];
-
-		// for (var i = 0; i < fullMenu.length; i++) {
-		// 	var dish = this.getDish(fullMenu[i]);
-		// 	selectedDishesList.push(dish);
-		// };
-		// return selectedDishesList;
-	}
-
-	//Returns all ingredients for all the dishes on the menu.
-	this.getAllIngredients = function() {
-		//TODO Lab 2
-		var allIngredients = {};
-
-		for (var i = 0; i < fullMenu.length; i++) {
-			var dishIngredients = this.getDish(fullMenu[i]).ingredients;
-
-			$.each( dishIngredients, function( index, ingredient ) {
-			  
-				if(ingredient.name in allIngredients)
-				{
-					allIngredients[ingredient.name]["quantity"]  += ingredient.quantity;
-					allIngredients[ingredient.name]["price"]  	 += ingredient.price;
-				}else
-				{
-					//element = {};
-					//element[ingredient.name] = ingredient;
-					allIngredients[ingredient.name] = ingredient;
-				}
-			});
-		};
-		
-		//return allIngredients;
-		return $.map(allIngredientsList, function(element,index) {return element}) ;	
-	}
-
-	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-	this.getTotalMenuPrice = function() {
-		//TODO Lab 2
-
-		var totalPrice =0;
-
-		for (var i = 0; i < fullMenu.length; i++) {
-			var dishIngredients = this.getDish(fullMenu[i]).ingredients;
-
-			$.each( dishIngredients, function( index, ingredient ) {
-				totalPrice += ingredient.price; 
-			});
-		};
-		return totalPrice;
-	}
-
-
-	this.getSelectedDishPrice = function(){
-
-		var dish = this.getDish(selectedDish);
-		var totalPrice = 0;
-		$.each( dish.ingredients, function( index, ingredient ) {
-			totalPrice += ingredient.price;
-		});
-
-		return totalPrice;
-	}
-
-	this.getDishPrice = function(dish){
-
-		var totalPrice = 0;
-		$.each( dish.ingredients, function( index, ingredient ) {
-			totalPrice += ingredient.price;
-		});
-
-		return totalPrice;
-	}
-	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
-	//it is removed from the menu and the new one added.
-	this.addDishToMenu = function(id) {
-		//TODO Lab 2 
-		fullMenu.push(id);
-	}
-
-	//Removes dish from menu
-	this.removeDishFromMenu = function(id) {
-		//TODO Lab 2
-		fullMenu.remove(id);
-	}
-
-	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
-	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
-	//if you don't pass any filter all the dishes will be returned
-	this.getAllDishesByType = function (type,filter) {
-		  return $(dishes).filter(function(index,dish) {
-				var found = true;
-				if(filter){
-					found = false;
-					$.each(dish.ingredients,function(index,ingredient) {
-						if(ingredient.name.indexOf(filter)!=-1) {
-							found = true;
-						}
-					});
-					if(dish.name.indexOf(filter) != -1)
-					{
-						found = true;
-					}
-				}
-			  	return dish.type == type && found;
-		  });	
-	}
-
-
-	this.getAllDishes = function (){
-		return dishes;
-	}
-
-	//function that returns a dish of specific ID
-	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
-			}
-		}
-	}
-
-	var numberOfGuests = 5;
-	var selectedDish = 2;
-
-	var fullMenu = [2, 3];
-
-	// the dishes variable contains an array of all the 
+// the dishes variable contains an array of all the 
 	// dishes in the database. each dish has id, name, type,
 	// image (name of the image file), description and
 	// array of ingredients. Each ingredient has name, 
@@ -244,6 +59,16 @@ var DinnerModel = function() {
 			'quantity':15,
 			'unit':'g',
 			'price':2
+			},{
+			'name':'milk',
+			'quantity':40,
+			'unit':'ml',
+			'price':6
+			},{
+			'name':'brown sugar',
+			'quantity':8,
+			'unit':'g',
+			'price':7
 			}]
 		},{
 		'id':3,
@@ -434,6 +259,62 @@ var DinnerModel = function() {
 		}
 	];
 
-console.log("s");
 
-}
+	var fullMenu = [ 1, 2 ];
+
+
+	function getDish(id) {
+	  for(key in dishes){
+			if(dishes[key].id == id) {
+				return dishes[key];
+			}
+		}
+	}
+
+	function getFullMenu(type) {
+		//TODO Lab 2
+		
+		return $(dishes).filter(function(index,dish) {
+			return  $.inArray( dish.id, fullMenu) !=-1;
+		});	
+
+		var selectedDishesList = [];
+
+		for (var i = 0; i < fullMenu.length; i++) {
+			
+			var dish = getDish(fullMenu[i]);
+			if(dish.type == type) selectedDishesList.push(dish);
+			
+		};
+
+		return selectedDishesList;
+
+	}
+
+
+
+  function getAllIngredients() {
+		//TODO Lab 2
+		var allIngredientsList = {};
+
+		for (var i = 0; i < fullMenu.length; i++) {
+			var dishIngredients = getDish(fullMenu[i]).ingredients;
+
+			$.each( dishIngredients, function( index, ingredient ) {
+			  
+				if(ingredient.name in allIngredientsList)
+				{
+					allIngredientsList[ingredient.name]["quantity"]  += ingredient.quantity;
+					allIngredientsList[ingredient.name]["price"]  += ingredient.price;
+				}else
+				{
+					//element = {};
+					//element[ingredient.name] = ingredient;
+					allIngredientsList[ingredient.name] = ingredient;
+				}
+			});
+		};
+		
+		return $.map(allIngredientsList, function(element,index) {return element}) ;
+
+	}
